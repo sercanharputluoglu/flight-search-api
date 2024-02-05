@@ -7,9 +7,10 @@ import org.springframework.stereotype.Repository;
 
 import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Repository
-public interface FlightRepository extends JpaRepository<FlightEntity, String> {
+public interface FlightRepository extends JpaRepository<FlightEntity, UUID> {
     List<FlightEntity> findByDepartAirport_CityAndArrivalAirport_CityAndDepartDate(
             String departCity, String arrivalCity, OffsetDateTime departDate);
 

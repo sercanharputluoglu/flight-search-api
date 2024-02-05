@@ -1,5 +1,4 @@
-package com.amadeus.project.controller.model.input;
-
+package com.amadeus.project.domain.services.dto.request;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,8 +8,7 @@ import java.time.OffsetDateTime;
 
 @Getter
 @Setter
-public class FlightInfoRequest {
-
+public class FlightRequestDTO {
     private String departCity;
     private String arrivalCity;
     private OffsetDateTime departDate;

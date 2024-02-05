@@ -1,17 +1,16 @@
-package com.amadeus.project.domain.services.dto.response;
+package com.amadeus.project.controller.model.input;
+
 
 import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
-import java.util.UUID;
 
 @Getter
 @Setter
-public class FlightInfoResponseDTO {
+public class FlightRequest {
 
-    private UUID id;
     private String departCity;
     private String arrivalCity;
     private OffsetDateTime departDate;

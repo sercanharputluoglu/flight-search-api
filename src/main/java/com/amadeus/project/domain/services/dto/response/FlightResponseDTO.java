@@ -9,8 +9,7 @@ import java.util.UUID;
 
 @Getter
 @Setter
-public class FlightInfoResponseDTO {
-
+public class FlightResponseDTO {
     private UUID id;
     private String departCity;
     private String arrivalCity;
