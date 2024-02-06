@@ -2,6 +2,7 @@ package com.amadeus.project.controller;
 
 
 import com.amadeus.project.controller.mapper.FlightControllerModelMapper;
+import com.amadeus.project.controller.model.input.FlightInfoRequest;
 import com.amadeus.project.controller.model.input.FlightRequest;
 import com.amadeus.project.controller.model.output.FlightInfoResponse;
 import com.amadeus.project.controller.model.output.FlightResponse;
@@ -10,6 +11,7 @@ import com.amadeus.project.domain.services.dto.request.FlightInfoRequestDTO;
 import com.amadeus.project.domain.services.dto.request.FlightRequestDTO;
 import com.amadeus.project.domain.services.dto.response.FlightInfoResponseDTO;
 import com.amadeus.project.domain.services.dto.response.FlightResponseDTO;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,8 +30,13 @@ public class FlightSearchController {
     private final FlightControllerModelMapper flightControllerMapper;
 
     @GetMapping
-    public ResponseEntity<List<FlightInfoResponse>> getFlightInfo(FlightInfoRequestDTO flightInfoRequestDTO) {
-        return ResponseEntity.ok(flightSearchService.getFlightInfo(flightInfoRequestDTO));
+    public ResponseEntity<List<FlightInfoResponse>> getFlightInfo(@Valid FlightInfoRequest flightInfoRequest) {
+
+        FlightInfoRequestDTO flightInfoRequestDTO = flightControllerMapper.toFlightInfoRequestDTO(flightInfoRequest);
+
+        List<FlightInfoResponse> flightInfoResponseList = flightSearchService.getFlightInfo(flightInfoRequestDTO);
+
+        return ResponseEntity.ok(flightInfoResponseList);
     }
 
     @GetMapping("/all-flights")
@@ -43,7 +50,7 @@ public class FlightSearchController {
     }
 
     @PostMapping()
-    public ResponseEntity<FlightResponse> addFlight(@RequestBody FlightRequest flightRequest){
+    public ResponseEntity<FlightResponse> addFlight(@Valid @RequestBody FlightRequest flightRequest){
 
         FlightRequestDTO flightRequestDTO = flightControllerMapper.toFlightRequestDTO(flightRequest);
 
@@ -63,7 +70,7 @@ public class FlightSearchController {
 
     @PutMapping("/{id}")
     public ResponseEntity<FlightResponse> updateFlight(
-            @PathVariable UUID id, @RequestBody FlightRequest flightRequest) {
+            @PathVariable UUID id, @Valid @RequestBody FlightRequest flightRequest) {
 
         FlightRequestDTO flightRequestDTO = flightControllerMapper.toFlightRequestDTO(flightRequest);
 
@@ -73,6 +80,4 @@ public class FlightSearchController {
 
         return ResponseEntity.ok(flightResponse);
     }
-
-
 }

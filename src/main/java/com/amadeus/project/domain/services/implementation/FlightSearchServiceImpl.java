@@ -67,25 +67,6 @@ public class FlightSearchServiceImpl implements FlightSearchService {
                 return flightInfoResponse;
             }).toList();
 
-
-
-
-//        List<FlightEntity> departFlightEntityList = flightRepository.findByDepartAirport_CityAndArrivalAirport_CityAndDepartDate(
-//                flightInfoRequestDTO.getDepartCity(),
-//                flightInfoRequestDTO.getArrivalCity(),
-//                flightInfoRequestDTO.getDepartDate()
-//        );
-//
-//        List<FlightEntity> returnFlightEntityList;
-//
-//        if (flightInfoRequestDTO.getArrivalDate() != null) {
-//             returnFlightEntityList = flightRepository.findByDepartAirport_CityAndArrivalAirport_CityAndDepartDate(
-//                    flightInfoRequestDTO.getArrivalCity(),
-//                    flightInfoRequestDTO.getDepartCity(),
-//                    flightInfoRequestDTO.getArrivalDate()
-//            );
-//        }
-
         return flightInfoResponseList;
     }
 
@@ -105,7 +86,6 @@ public class FlightSearchServiceImpl implements FlightSearchService {
 
         FlightEntity flightEntity = flightInfoServiceDTOMapper.toFlightEntity(flightRequestDTO);
 
-//        TODO: get airports from db in one query using or operator
         AirportEntity departAirportEntity = airportRepository
                 .findByCity(flightRequestDTO.getDepartCity())
                 .orElseThrow(() -> new RuntimeException("Airport not found"));
@@ -146,6 +126,4 @@ public class FlightSearchServiceImpl implements FlightSearchService {
 
         return flightResponseDTO;
     }
-
-
 }

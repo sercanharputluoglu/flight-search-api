@@ -6,6 +6,7 @@ import com.amadeus.project.controller.model.output.AirportResponse;
 import com.amadeus.project.domain.services.AirportService;
 import com.amadeus.project.domain.services.dto.request.AirportRequestDTO;
 import com.amadeus.project.domain.services.dto.response.AirportResponseDTO;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +36,7 @@ public class AirportController {
     }
 
     @PostMapping
-    public ResponseEntity<AirportResponse> addAirport(@RequestBody AirportRequest airportRequest) {
+    public ResponseEntity<AirportResponse> addAirport(@Valid @RequestBody AirportRequest airportRequest) {
 
         AirportRequestDTO airportRequestDTO = airportControllerModelMapper.toAirportRequestDTO(airportRequest);
 
@@ -55,7 +56,7 @@ public class AirportController {
 
     @PutMapping("/{id}")
     public ResponseEntity<AirportResponse> updateAirport(
-            @PathVariable UUID id, @RequestBody AirportRequest airportRequest) {
+            @PathVariable UUID id, @Valid @RequestBody AirportRequest airportRequest) {
 
         AirportRequestDTO airportRequestDTO = airportControllerModelMapper.toAirportRequestDTO(airportRequest);
 
